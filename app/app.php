@@ -13,7 +13,7 @@
     $app = new Silex\Application();
     // Uncomment line below for debug messages
     // $app['debug'] = true;
-      $app->register(new Silex\Provider\TwigServiceProvider(), array(
+    $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
 
@@ -24,16 +24,16 @@
 
     // Route to display contact successfully created page
     $app->post("/create_contact", function() use ($app) {
-          $contact = new Contact($_POST['name'],$_POST['phone'],$_POST['address']);
-          $contact->save();
+        $contact = new Contact($_POST['name'],$_POST['phone'],$_POST['address']);
+        $contact->save();
 
-          return $app['twig']->render('create_contact.html.twig', array('newcontact' => $contact));
+        return $app['twig']->render('create_contact.html.twig', array('newcontact' => $contact));
     });
 
     // Route to display confirmation of deleting all contacts
     $app->get("/delete_contacts", function() use ($app) {
         Contact::deleteAll();
-            return $app['twig']->render('delete_contacts.html.twig', array('list_of_contacts' => array() ));
+        return $app['twig']->render('delete_contacts.html.twig', array('list_of_contacts' => array() ));
     });
 
     return $app;
